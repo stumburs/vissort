@@ -1,17 +1,6 @@
-#include <raylib.h>
+#include "App.hpp"
 
 int main()
 {
-    InitWindow(1280, 720, "vissort");
-    SetTargetFPS(60);
-
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        {
-            ClearBackground(BLACK);
-        }
-        EndDrawing();
-    }
-    CloseWindow();
+    App().Run();
 }

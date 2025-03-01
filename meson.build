@@ -28,7 +28,12 @@ endif
 
 inc_dir = include_directories('include')
 
-sources = files('src/main.cpp')
+sources = files(
+    'src/App.cpp',
+    'src/Gui.cpp',
+    'src/Sorter.cpp',
+    'src/main.cpp',
+)
 
 executable(
     meson.project_name(),
