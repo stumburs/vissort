@@ -1,5 +1,5 @@
 #include "Gui.hpp"
-#include <raylib.h>
+#include "raylib.h"
 #include <algorithm>
 #include <cmath>
 

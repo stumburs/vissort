@@ -1,5 +1,5 @@
 #include "App.hpp"
-#include <raylib.h>
+#include "raylib.h"
 
 App::App() : gui(sorter)
 {
