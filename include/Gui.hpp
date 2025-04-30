@@ -10,7 +10,7 @@ public:
     void Render();
 
 private:
-    void DrawData(const std::vector<Element> &vec);
+    void RenderData(const std::vector<Element> &vec);
 
     Sorter &sorter;
 };

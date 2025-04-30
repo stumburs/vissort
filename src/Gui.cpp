@@ -13,27 +13,29 @@ void Gui::Render()
     {
         ClearBackground({40, 44, 52, 255});
 
-        this->DrawData(this->sorter.GetData());
+        this->RenderData(this->sorter.GetData());
 
         DrawFPS(20, 20);
     }
     EndDrawing();
 }
 
-void Gui::DrawData(const std::vector<Element> &vec)
+// Render sorter data to screen.
+// Size is dynamically adjusted based off window resolution.
+void Gui::RenderData(const std::vector<Element> &data)
 {
-    if (vec.empty())
+    if (data.empty())
         return;
 
-    auto max = std::max_element(vec.begin(), vec.end(), [](const Element &a, const Element &b)
+    auto max = std::max_element(data.begin(), data.end(), [](const Element &a, const Element &b)
                                 { return a.value < b.value; });
 
-    auto scale_x = GetScreenWidth() / static_cast<float>(vec.size());
+    auto scale_x = GetScreenWidth() / static_cast<float>(data.size());
     auto scale_y = GetScreenHeight() / static_cast<float>(max->value);
 
-    for (size_t i = 0; i < vec.size(); i++)
+    for (size_t i = 0; i < data.size(); i++)
     {
-        const Element &e = vec.at(i);
+        const Element &e = data.at(i);
         DrawRectangle(
             scale_x * i,
             GetScreenHeight() - e.value * scale_y,
