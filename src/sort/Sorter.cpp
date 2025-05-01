@@ -1,19 +1,39 @@
 #include "Sorter.hpp"
+#include <cstdlib>
+#include <memory>
 
-Sorter::Sorter()
+void Sorter::SetAlgorithm(std::unique_ptr<ISortAlgorithm> algo)
 {
-    this->InitData(100);
+    this->algorithm = std::move(algo);
 }
 
 // Initializes sortable data.
-// TODO: Implement different kinds of starting data.
 void Sorter::InitData(size_t data_size)
 {
     data.clear();
     data.reserve(data_size);
+
+    // Temporary solution
+    for (std::size_t i = 0; i < data_size; ++i)
+    {
+        data.emplace_back(rand() % 100, GRAY);
+    }
 }
 
-std::vector<Element> &Sorter::GetData()
+void Sorter::StartSort()
+{
+    if (this->algorithm)
+    {
+        this->algorithm->Init(data);
+    }
+}
+
+bool Sorter::Step()
+{
+    return this->algorithm ? this->algorithm->Step() : false;
+}
+
+Data &Sorter::GetData()
 {
     return this->data;
 }

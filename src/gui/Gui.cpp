@@ -4,6 +4,7 @@
 #include <cmath>
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
+#include "BubbleSort.hpp"
 
 Gui::Gui(Sorter &sorter, DataGenerator &data_generator) : sorter(sorter), data_generator(data_generator)
 {
@@ -11,6 +12,12 @@ Gui::Gui(Sorter &sorter, DataGenerator &data_generator) : sorter(sorter), data_g
 
 void Gui::Render()
 {
+
+    if (IsKeyPressed(KEY_SPACE) || IsKeyDown(KEY_RIGHT_SHIFT))
+    {
+        sorter.Step();
+    }
+
     BeginDrawing();
     {
         ClearBackground({40, 44, 52, 255});
@@ -52,9 +59,16 @@ void Gui::RenderData(const Data &data)
 
 void Gui::RenderMenu()
 {
-    if (GuiButton({100, 100, 40, 40}, nullptr))
+    if (GuiButton({100, 100, 40, 40}, "buh"))
     {
-        std::printf("Ascending\n");
+        sorter.InitData(100);
         data_generator.generator["Descending"]->Generate(sorter.GetData());
+        sorter.SetAlgorithm(std::make_unique<BubbleSort>());
+        sorter.StartSort();
+    }
+
+    if (GuiButton({20, static_cast<float>(GetScreenHeight()) - 60, 80, 40}, "Step [_]"))
+    {
+        sorter.Step();
     }
 }
