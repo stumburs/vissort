@@ -2,8 +2,10 @@
 #include "raylib.h"
 #include <algorithm>
 #include <cmath>
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
 
-Gui::Gui(Sorter &sorter) : sorter(sorter)
+Gui::Gui(Sorter &sorter, DataGenerator &data_generator) : sorter(sorter), data_generator(data_generator)
 {
 }
 
@@ -15,13 +17,16 @@ void Gui::Render()
 
         this->RenderData(this->sorter.GetData());
 
+        this->RenderMenu();
+
         DrawFPS(20, 20);
     }
     EndDrawing();
 }
 
 // Render sorter data to screen.
-// Size is dynamically adjusted based off window resolution.
+// Size is dynamically adjusted based off window resolution
+// spanning maximum available space.
 void Gui::RenderData(const std::vector<Element> &data)
 {
     if (data.empty())
@@ -42,5 +47,14 @@ void Gui::RenderData(const std::vector<Element> &data)
             std::ceil(scale_x),
             e.value * scale_y + 1,
             e.color);
+    }
+}
+
+void Gui::RenderMenu()
+{
+    if (GuiButton({100, 100, 40, 40}, nullptr))
+    {
+        std::printf("Ascending\n");
+        data_generator.generator["Ascending"]->Generate(sorter.GetData());
     }
 }

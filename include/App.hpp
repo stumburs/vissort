@@ -1,6 +1,7 @@
 #pragma once
 #include "Gui.hpp"
 #include "Sorter.hpp"
+#include "DataGenerator.hpp"
 
 class App
 {
@@ -9,7 +10,7 @@ public:
     void Run();
 
 private:
-    // Generators generators;
+    DataGenerator data_generator;
     Sorter sorter;
     Gui gui;
 };

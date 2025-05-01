@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX := g++
-CXXFLAGS := -std=c++20 -g -Wall -I./include -I./include/raylib -O3 -MMD
+CXXFLAGS := -std=c++20 -g -Wall -I./include -I./include/raylib -I./include/raygui -O3 -MMD
 
 # Linker flags
 LDFLAGS := -lraylib
