@@ -1,6 +1,6 @@
 #include "GenDescending.hpp"
 
-void GenDescending::Generate(std::vector<Element> &data)
+void GenDescending::Generate(Data &data)
 {
     data.clear();
     for (size_t i = 1; i <= data.capacity(); i++)

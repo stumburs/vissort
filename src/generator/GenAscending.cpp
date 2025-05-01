@@ -1,6 +1,6 @@
 #include "GenAscending.hpp"
 
-void GenAscending::Generate(std::vector<Element> &data)
+void GenAscending::Generate(Data &data)
 {
     data.clear();
     for (size_t i = 1; i <= data.capacity(); i++)
