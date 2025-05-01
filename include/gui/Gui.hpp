@@ -11,7 +11,7 @@ public:
     void Render();
 
 private:
-    void RenderData(const std::vector<Element> &vec);
+    void RenderData(const Data &data);
     void RenderMenu();
 
     Sorter &sorter;

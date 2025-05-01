@@ -1,10 +1,10 @@
 #pragma once
-#include "Element.hpp"
+#include "Data.hpp"
 #include <vector>
 
 class IGenerateAlgorithm
 {
 public:
     virtual ~IGenerateAlgorithm() = default;
-    virtual void Generate(std::vector<Element> &data) = 0;
+    virtual void Generate(Data &data) = 0;
 };

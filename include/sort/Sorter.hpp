@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Element.hpp"
+#include "Data.hpp"
 #include <cstddef>
 
 class Sorter
@@ -8,8 +8,8 @@ class Sorter
 public:
     Sorter();
     void InitData(size_t data_size);
-    std::vector<Element> &GetData();
+    Data &GetData();
 
 private:
-    std::vector<Element> data;
+    Data data;
 };

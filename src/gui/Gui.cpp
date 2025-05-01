@@ -27,7 +27,7 @@ void Gui::Render()
 // Render sorter data to screen.
 // Size is dynamically adjusted based off window resolution
 // spanning maximum available space.
-void Gui::RenderData(const std::vector<Element> &data)
+void Gui::RenderData(const Data &data)
 {
     if (data.empty())
         return;
@@ -55,6 +55,6 @@ void Gui::RenderMenu()
     if (GuiButton({100, 100, 40, 40}, nullptr))
     {
         std::printf("Ascending\n");
-        data_generator.generator["Ascending"]->Generate(sorter.GetData());
+        data_generator.generator["Descending"]->Generate(sorter.GetData());
     }
 }
