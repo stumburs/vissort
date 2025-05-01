@@ -9,7 +9,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-include_directories(include/core include/generator include/gui include/raylib include/raygui include/sort)
+include_directories(
+    include/core
+    include/generator
+    include/gui
+    include/raylib
+    include/raygui
+    include/sort
+)
 
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
     src/*.cpp
@@ -17,10 +24,22 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
 
 add_executable(vissort ${SRC_FILES})
 
+# Janky solution to disable annoying warnings from raygui.h
+add_library(raygui INTERFACE)
+target_include_directories(raygui INTERFACE ${CMAKE_SOURCE_DIR}/include/raygui)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(raygui INTERFACE -w)
+elseif(MSVC)
+    target_compile_options(raygui INTERFACE /w)
+endif()
+
+target_link_libraries(vissort PRIVATE raygui)
+
 if (WIN32)
     target_link_directories(vissort PRIVATE lib/windows_x64)
-    target_link_libraries(vissort raylib winmm gdi32)
+    target_link_libraries(vissort PRIVATE raylib winmm gdi32)
 elseif(UNIX)
     target_link_directories(vissort PRIVATE lib/linux_x64)
-    target_link_libraries(vissort raylib)
+    target_link_libraries(vissort PRIVATE raylib)
 endif()
