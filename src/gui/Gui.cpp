@@ -47,13 +47,18 @@ void Gui::RenderData(const Data &data)
 
     for (size_t i = 0; i < data.size(); i++)
     {
+        auto comparing_indices = sorter.GetActiveIndices();
         const Element &e = data.at(i);
         DrawRectangle(
             scale_x * i,
             GetScreenHeight() - e.value * scale_y,
             std::ceil(scale_x),
             e.value * scale_y + 1,
+#ifdef ENABLE_COMPARISON
+            (comparing_indices.first == i || comparing_indices.second == i ? RED : e.color));
+#else
             e.color);
+#endif
     }
 }
 

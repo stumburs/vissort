@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.31)
 project(vissort LANGUAGES CXX)
 
+option(ENABLE_COMPARISON "Enable the visualization of active comparisons" OFF)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -23,6 +25,10 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
 )
 
 add_executable(vissort ${SRC_FILES})
+
+if (ENABLE_COMPARISON)
+    add_compile_definitions(vissort PRIVATE ENABLE_COMPARISON)
+endif()
 
 # Janky solution to disable annoying warnings from raygui.h
 add_library(raygui INTERFACE)

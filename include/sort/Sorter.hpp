@@ -13,6 +13,7 @@ public:
     void StartSort();
     bool Step();
     Data &GetData();
+    std::pair<size_t, size_t> GetActiveIndices() const;
 
 private:
     Data data;

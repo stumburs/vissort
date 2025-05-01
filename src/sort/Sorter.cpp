@@ -33,6 +33,13 @@ bool Sorter::Step()
     return this->algorithm ? this->algorithm->Step() : false;
 }
 
+std::pair<size_t, size_t> Sorter::GetActiveIndices() const
+{
+    if (this->algorithm)
+        return this->algorithm->GetActiveIndices();
+    return {0, 0};
+}
+
 Data &Sorter::GetData()
 {
     return this->data;
